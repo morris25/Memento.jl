@@ -15,7 +15,7 @@ Adds a temporary test handler to the `logger` that checks for a record with the 
 """
 macro test_log(logger, level, msg, expr)
     quote
-        handler = TestHandler($level, $msg)
+        handler = TestHandler($(esc(level)), $(esc(msg)))
         handlers = copy(gethandlers($(esc(logger))))
         push!($(esc(logger)), handler)
 
